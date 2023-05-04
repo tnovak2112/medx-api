@@ -33,3 +33,19 @@ export async function DBobtenerPerfilesPorGrado(req: any, res: any) {
   }
   return res;
 }
+
+export async function DBobtenerPerfilesPorCoincidencia(req: any, res: any) {
+  const { user_name } = req.query;
+  console.log(user_name);
+
+  try {
+    const result = await database.simpleExecute(
+      `SELECT * FROM medx.profile WHERE REGEXP_LIKE(profile.first_name, '${user_name}', 'i')`
+    );
+
+    res = msgHTTP.read200(res, result);
+  } catch (error) {
+    res = msgHTTP.error(res, error);
+  }
+  return res;
+}
