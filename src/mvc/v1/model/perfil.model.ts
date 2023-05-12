@@ -36,11 +36,12 @@ export async function DBobtenerPerfilesPorGrado(req: any, res: any) {
 
 export async function DBobtenerPerfilesPorCoincidencia(req: any, res: any) {
   const { user_name } = req.query;
-  console.log(user_name);
 
   try {
     const result = await database.simpleExecute(
-      `SELECT * FROM medx.profile WHERE REGEXP_LIKE(profile.first_name, '${user_name}', 'i')`
+      `SELECT * FROM ${
+        process.env.DATABASE_DATABASE
+      }.profile WHERE LOWER(profile.first_name) SIMILAR TO '%${user_name.toLowerCase()}%';`
     );
 
     res = msgHTTP.read200(res, result);
