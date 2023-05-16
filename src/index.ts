@@ -10,7 +10,12 @@ const PORT = process.env.API_PORT;
 
 app.use(
   cors({
-    origin: ["http://localhost:4200"],
+    origin: [
+      "http://localhost:4200",
+      "http://medxapp.cl",
+      "https://medxapp.cl",
+      "www.medxapp.cl",
+    ],
   })
 );
 
