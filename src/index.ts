@@ -15,6 +15,8 @@ app.use(
       "http://medxapp.cl",
       "https://medxapp.cl",
       "www.medxapp.cl",
+      "http://www.medxapp.cl",
+      "https://www.medxapp.cl",
     ],
   })
 );
