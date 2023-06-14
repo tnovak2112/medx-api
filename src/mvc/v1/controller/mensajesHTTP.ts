@@ -105,18 +105,13 @@ module.exports.tokenMessage200 = (
   return res;
 };
 
-/////// MOODLE RESPONSES
+/////// ALL RESPONSES
 
-module.exports.readMoodle200 = (res: any, response: any) => {
+module.exports.resonse20 = (res: any, data: any) => {
   res.status(200);
   res.json({
     status: 200,
-    message:
-      response.data.length !== 0
-        ? "Informacion encontrada correctamente"
-        : "No se ha encontrado informacion",
-    row_length: response.data.length,
-    data: response.data,
+    data,
   });
   return res;
 };

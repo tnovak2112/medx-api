@@ -66,6 +66,12 @@ v1.use("/grados", require("./v1/grados.route"));
 v1.use("/comunas", require("./v1/comunas.route"));
 
 /**
+ * Endpoint para Commune
+ */
+
+v1.use("/administracion", require("./v1/administracion.route"));
+
+/**
  * Endpoint para Region
  */
 

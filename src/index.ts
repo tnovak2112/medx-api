@@ -5,8 +5,11 @@ require("dotenv").config();
 const app = express();
 const routes = require("./routes/routes");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const PORT = process.env.API_PORT;
+
+app.use(bodyParser.json({ limit: "10mb" }));
 
 app.use(
   cors({

@@ -1,7 +1,4 @@
-import {
-  obtenerConsulta,
-  crearConsulta,
-} from "../../mvc/v1/controller/consulta.controller";
+import { administracionCrearPerfilCompleto } from "../../mvc/v1/controller/administracion.controller";
 
 const express = require("express");
 const router = express.Router();
@@ -16,8 +13,6 @@ DELETE: Eliminar una entidad
 *********************************************************************
 */
 
-router.get("/obtener", obtenerConsulta);
-
-router.put("/crear", crearConsulta);
+router.put("/crearPerfilCompleto", administracionCrearPerfilCompleto);
 
 module.exports = router;
