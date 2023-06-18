@@ -7,7 +7,7 @@
     "dev": "ts-node-dev src/index.ts",
     "start": "node build/index.js",
     "tsc": "tsc",
-    "copy-files-prod": "sudo cp .env build/ && sudo cp src/core/emails/* build/core/emails/",
+    "prod-files": "sudo cp .env build/ && mkdir src/core/emails && sudo cp src/core/emails/* build/core/emails/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
