@@ -4,7 +4,6 @@ import {
   updatePasswordSQL,
   updateUsuarioCodigoSQL,
 } from "../../../core/querys/usuario.query";
-import { emailCodigo } from "./email.model";
 
 const msgHTTP = require("../controller/mensajesHTTP");
 const database = require("../../../services/database.service");
@@ -46,7 +45,7 @@ export async function DBregistroUsuario(req: any, res: any) {
       2,
     ]);
 
-    await emailCodigo(email, "Bienvenido a MEDX", "Gracias por registrarte!");
+    //await emailCodigo(email, "Bienvenido a MEDX", "Gracias por registrarte!");
 
     res = msgHTTP.insert200(res, result);
   } catch (error) {
@@ -66,7 +65,7 @@ export async function DBgenerarCodigoUsuario(req: any, res: any) {
       email,
     ]);
 
-    await emailCodigo(email, "Prueba", "El codigo es: " + codigo);
+    //await emailCodigo(email, "Prueba", "El codigo es: " + codigo);
 
     res = msgHTTP.message200(res, result, "Código enviado correctamente.");
   } catch (error) {

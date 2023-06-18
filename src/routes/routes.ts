@@ -72,6 +72,12 @@ v1.use("/comunas", require("./v1/comunas.route"));
 v1.use("/administracion", require("./v1/administracion.route"));
 
 /**
+ * Endpoint para EMAIL
+ */
+
+v1.use("/email", require("./v1/email.route"));
+
+/**
  * Endpoint para Region
  */
 

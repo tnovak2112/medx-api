@@ -107,7 +107,7 @@ module.exports.tokenMessage200 = (
 
 /////// ALL RESPONSES
 
-module.exports.resonse20 = (res: any, data: any) => {
+module.exports.response200 = (res: any, data: any) => {
   res.status(200);
   res.json({
     status: 200,
