@@ -15,6 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:4200",
+      "https://localhost:4200",
       "http://medxapp.cl",
       "https://medxapp.cl",
       "www.medxapp.cl",
