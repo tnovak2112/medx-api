@@ -7,6 +7,7 @@
     "dev": "ts-node-dev src/index.ts",
     "start": "node build/index.js",
     "tsc": "tsc",
+    "tsc-prod": "tsc && cp .env build/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
