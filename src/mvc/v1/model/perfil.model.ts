@@ -4,10 +4,10 @@ const msgHTTP = require("../controller/mensajesHTTP");
 const database = require("../../../services/database.service");
 
 export async function DBobtenerPerfil(req: any, res: any) {
-  const { user_id } = req.query;
+  const { user_uuid } = req.query;
 
   try {
-    const result = await database.simpleExecute(getProfileSQL, [user_id]);
+    const result = await database.simpleExecute(getProfileSQL, [user_uuid]);
 
     res = msgHTTP.read200(res, result);
   } catch (error) {

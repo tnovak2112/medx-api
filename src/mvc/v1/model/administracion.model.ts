@@ -45,8 +45,8 @@ export async function DBadministracionCrearPerfilCompleto(req: any, res: any) {
     ]);
 
     // CREAR PERFIL
-    if (resultCreateUser.rows[0].id) {
-      let user_id = resultCreateUser.rows[0].id;
+    if (resultCreateUser.rows[0].uuid) {
+      let user_uuid = resultCreateUser.rows[0].uuid;
       const resultCreateProfile = await database.simpleExecute(crearPerfil, [
         first_name,
         middle_name,
@@ -57,7 +57,7 @@ export async function DBadministracionCrearPerfilCompleto(req: any, res: any) {
         rut,
         profile_photo,
         university_id,
-        user_id,
+        user_uuid,
         consult_id,
         graduation_year,
         other_studies,
@@ -97,7 +97,7 @@ export async function DBadministracionCrearPerfilCompleto(req: any, res: any) {
       }
     }
 
-    res = msgHTTP.resonse20(res, "resultCreateUser");
+    res = msgHTTP.response200(res, "resultCreateUser");
   } catch (error) {
     res = msgHTTP.error(res, error);
   }

@@ -1,4 +1,6 @@
 import express from "express";
+const https = require("https");
+const fs = require("fs");
 
 require("dotenv").config();
 
@@ -18,9 +20,9 @@ app.use(
       "https://localhost:4200",
       "http://medxapp.cl",
       "https://medxapp.cl",
-      "www.medxapp.cl",
       "http://www.medxapp.cl",
       "https://www.medxapp.cl",
+      "https://www.medxapp.cl/home",
     ],
   })
 );

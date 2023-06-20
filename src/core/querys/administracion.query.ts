@@ -2,7 +2,7 @@ export const crearUsuario = `
 INSERT INTO ${process.env.DATABASE_DATABASE}.user 
 (email,password,role_id) 
 VALUES ($1, $2, $3) 
-RETURNING id`;
+RETURNING uuid`;
 
 export const crearPerfil = `
 INSERT INTO ${process.env.DATABASE_DATABASE}.profile 
@@ -15,7 +15,7 @@ INSERT INTO ${process.env.DATABASE_DATABASE}.profile
     rut,
     profile_photo,
     university_id,
-    user_id,
+    user_uuid,
     consult_id,
     graduation_year,
     other_studies,
