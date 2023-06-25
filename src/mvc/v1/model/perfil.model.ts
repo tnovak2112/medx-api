@@ -1,4 +1,7 @@
-import { getProfileSQL } from "../../../core/querys/perfil.query";
+import {
+  getProfilePerMedicalCenterSQL,
+  getProfileSQL,
+} from "../../../core/querys/perfil.query";
 
 const msgHTTP = require("../controller/mensajesHTTP");
 const database = require("../../../services/database.service");
@@ -90,6 +93,21 @@ export async function DBobtenerPerfilesPorCoincidencia(req: any, res: any) {
         process.env.DATABASE_DATABASE
       }.profile WHERE LOWER(profile.first_name) SIMILAR TO '%${user_name.toLowerCase()}%';`
     );
+
+    res = msgHTTP.read200(res, result);
+  } catch (error) {
+    res = msgHTTP.error(res, error);
+  }
+  return res;
+}
+
+export async function DBobtenerPerfilesPorCentroMedico(req: any, res: any) {
+  const { uuid } = req.query;
+
+  try {
+    const result = await database.simpleExecute(getProfilePerMedicalCenterSQL, [
+      uuid,
+    ]);
 
     res = msgHTTP.read200(res, result);
   } catch (error) {

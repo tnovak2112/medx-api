@@ -78,6 +78,12 @@ v1.use("/administracion", require("./v1/administracion.route"));
 v1.use("/email", require("./v1/email.route"));
 
 /**
+ * Endpoint para MEDICAL CENTER
+ */
+
+v1.use("/centroMedico", require("./v1/centro-medico.route"));
+
+/**
  * Endpoint para Region
  */
 

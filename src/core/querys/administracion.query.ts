@@ -11,7 +11,6 @@ INSERT INTO ${process.env.DATABASE_DATABASE}.profile
     last_name,
     second_lastname,
     birth_date,
-    age,
     rut,
     profile_photo,
     university_id,

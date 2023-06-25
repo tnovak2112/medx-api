@@ -1,9 +1,8 @@
 import {
-  obtenerPerfil,
-  obtenerPerfilesPorGrado,
-  obtenerPerfilesPorCoincidencia,
-  obtenerPerfilesPorCentroMedico,
-} from "../../mvc/v1/controller/perfil.controller";
+  obtenerCentroMedico,
+  crearCentroMedico,
+} from "../../mvc/v1/controller/centro-medico.controller";
+import { autenticacion } from "../../services/auth.service";
 
 const express = require("express");
 const router = express.Router();
@@ -18,12 +17,8 @@ DELETE: Eliminar una entidad
 *********************************************************************
 */
 
-router.get("/obtener", obtenerPerfil);
+router.get("/obtener", obtenerCentroMedico);
 
-router.get("/obtenerPerfilesPorCategoria", obtenerPerfilesPorGrado);
-
-router.get("/obtenerPerfilesPorCoincidencia", obtenerPerfilesPorCoincidencia);
-
-router.get("/obtenerPerfilesPorCentroMedico", obtenerPerfilesPorCentroMedico);
+router.put("/crear", autenticacion, crearCentroMedico);
 
 module.exports = router;
