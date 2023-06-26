@@ -1,4 +1,5 @@
 import {
+  listarCentroMedico,
   obtenerCentroMedico,
   crearCentroMedico,
 } from "../../mvc/v1/controller/centro-medico.controller";
@@ -16,6 +17,8 @@ PATCH:  Modificar parcialmente una entidad
 DELETE: Eliminar una entidad
 *********************************************************************
 */
+
+router.get("/listar", listarCentroMedico);
 
 router.get("/obtener", obtenerCentroMedico);
 

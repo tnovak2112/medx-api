@@ -32,6 +32,7 @@ export async function DBadministracionCrearPerfilCompleto(req: any, res: any) {
     profile_has_category,
     profile_has_speciality,
     profile_has_sub_speciality,
+    medical_center_uuid,
   } = req.body;
 
   const activo = 1;
@@ -63,6 +64,7 @@ export async function DBadministracionCrearPerfilCompleto(req: any, res: any) {
         instagram,
         linkedin,
         activo,
+        medical_center_uuid,
       ]);
 
       if (resultCreateProfile.rows[0].id) {

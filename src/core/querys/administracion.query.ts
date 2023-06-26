@@ -21,7 +21,8 @@ INSERT INTO ${process.env.DATABASE_DATABASE}.profile
     short_resume,
     instagram,
     linkedin,
-    activo) 
+    activo,
+    medical_center_uuid) 
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
 RETURNING id`;
 

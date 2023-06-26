@@ -1,10 +1,22 @@
 import {
   getCentroMedicoSQL,
+  litarCentroMedicoSQL,
   postCentroMedicoSQL,
 } from "../../../core/querys/centro-medico.query";
 
 const msgHTTP = require("../controller/mensajesHTTP");
 const database = require("../../../services/database.service");
+
+export async function DBlistarCentroMedico(_req: any, res: any) {
+  try {
+    const result = await database.simpleExecute(litarCentroMedicoSQL);
+
+    res = msgHTTP.read200(res, result);
+  } catch (error) {
+    res = msgHTTP.error(res, error);
+  }
+  return res;
+}
 
 export async function DBobtenerCentroMedico(req: any, res: any) {
   const { uuid } = req.query;
@@ -29,6 +41,8 @@ export async function DBcrearCentroMedico(req: any, res: any) {
     phone_2,
     commune_id,
     medical_center_type_id,
+    url,
+    image_logo,
   } = req.body;
 
   try {
@@ -42,6 +56,8 @@ export async function DBcrearCentroMedico(req: any, res: any) {
       phone_2,
       commune_id,
       medical_center_type_id,
+      url,
+      image_logo,
     ]);
 
     res = msgHTTP.read200(res, result);
