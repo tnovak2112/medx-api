@@ -1,6 +1,9 @@
 export const litarCentroMedicoSQL = `
 SELECT uuid, name, email FROM ${process.env.DATABASE_DATABASE}.medical_center`;
 
+export const litarTiposCentroMedicoSQL = `
+SELECT * FROM ${process.env.DATABASE_DATABASE}.medical_center_type`;
+
 export const getCentroMedicoSQL = `
 SELECT mc.*, mct.name as medical_center_type_name
 FROM ${process.env.DATABASE_DATABASE}.medical_center mc 

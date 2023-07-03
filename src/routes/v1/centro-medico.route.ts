@@ -2,6 +2,7 @@ import {
   listarCentroMedico,
   obtenerCentroMedico,
   crearCentroMedico,
+  listarTiposCentroMedico,
 } from "../../mvc/v1/controller/centro-medico.controller";
 import { autenticacion } from "../../services/auth.service";
 
@@ -23,5 +24,7 @@ router.get("/listar", listarCentroMedico);
 router.get("/obtener", obtenerCentroMedico);
 
 router.put("/crear", autenticacion, crearCentroMedico);
+
+router.get("/listarTipos", listarTiposCentroMedico);
 
 module.exports = router;

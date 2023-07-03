@@ -1,6 +1,7 @@
 import {
   getCentroMedicoSQL,
   litarCentroMedicoSQL,
+  litarTiposCentroMedicoSQL,
   postCentroMedicoSQL,
 } from "../../../core/querys/centro-medico.query";
 
@@ -59,6 +60,17 @@ export async function DBcrearCentroMedico(req: any, res: any) {
       url,
       image_logo,
     ]);
+
+    res = msgHTTP.read200(res, result);
+  } catch (error) {
+    res = msgHTTP.error(res, error);
+  }
+  return res;
+}
+
+export async function DBlistarTiposCentroMedico(_req: any, res: any) {
+  try {
+    const result = await database.simpleExecute(litarTiposCentroMedicoSQL);
 
     res = msgHTTP.read200(res, result);
   } catch (error) {
