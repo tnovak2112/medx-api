@@ -58,7 +58,23 @@ export async function DBobtenerPerfilesPorGrado(req: any, res: any) {
         AND chi.insurance_id = ${insuranceId}`);
     }
 
-    let sqlStart = `SELECT p.*
+    let sqlStart = `SELECT p.id, 
+        p.first_name, 
+        p.middle_name, 
+        p.last_name, 
+        p.second_lastname, 
+        p.birth_date, 
+        p.profile_photo, 
+        p.university_id, 
+        p.consult_id, 
+        p.user_uuid, 
+        p.graduation_year, 
+        p.other_studies, 
+        p.short_resume, 
+        p.instagram, 
+        p.linkedin, 
+        p.activo, 
+        p.medical_center_uuid 
         FROM ${process.env.DATABASE_DATABASE}.profile_has_category phc
         JOIN ${process.env.DATABASE_DATABASE}.profile p ON phc.profile_id = p.id
         JOIN ${process.env.DATABASE_DATABASE}.consult c ON p.consult_id = c.id`;

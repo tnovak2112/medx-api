@@ -3,6 +3,7 @@ import {
   registroUsuario,
   generarCodigoUsuario,
   actualizarClaveUsuario,
+  verificarCodigoUsuario,
 } from "../../mvc/v1/controller/usuario.controller";
 
 const express = require("express");
@@ -23,6 +24,8 @@ router.get("/login", autenticacionUsuario);
 router.post("/registro", registroUsuario);
 
 router.put("/generar_codigo", generarCodigoUsuario);
+
+router.put("/verificar_codigo", verificarCodigoUsuario);
 
 router.put("/actualizar_clave", actualizarClaveUsuario);
 

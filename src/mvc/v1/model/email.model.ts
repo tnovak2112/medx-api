@@ -4,6 +4,9 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
 
+import AWS from "aws-sdk";
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+
 const OAuth2 = google.auth.OAuth2;
 const OAuth2_client = new OAuth2(
   process.env.EMAIL_CLIENT_ID,
@@ -71,4 +74,51 @@ export async function DBformularioContacto(req: any, res: any) {
     res = msgHTTP.error(res, error);
   }
   return res;
+}
+
+// AWS.config.update({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   region: process.env.AWS_REGION,
+// });
+
+const client = new SESClient({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+});
+
+export async function DBregisterMail(_req: any, _res: any) {
+  const filePath = `${emailFolderPath}EmailContacto.html`;
+
+  try {
+    const ses = new AWS.SES();
+    const htmlContent = fs.readFileSync(filePath, "utf-8");
+
+    const params = {
+      Source: process.env.AWS_EMAIL,
+      Destination: {
+        ToAddresses: ["ignacio.fuentes@genesys.cl"],
+      },
+      Message: {
+        Subject: {
+          Data: "Hello from AWS SES",
+        },
+        Body: {
+          Html: {
+            Data: htmlContent,
+          },
+        },
+      },
+    };
+
+    const command = new SendEmailCommand(params);
+    const result = await client.send(command);
+    console.log("Email sent successfully:", result);
+  } catch (error) {
+    console.error("Failed to send email:", error);
+  }
+  return null;
 }

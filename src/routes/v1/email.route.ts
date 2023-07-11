@@ -1,4 +1,7 @@
-import { formularioContacto } from "../../mvc/v1/controller/email.controller";
+import {
+  formularioContacto,
+  registerMail,
+} from "../../mvc/v1/controller/email.controller";
 
 const express = require("express");
 const router = express.Router();
@@ -14,5 +17,7 @@ DELETE: Eliminar una entidad
 */
 
 router.post("/formulario_contacto", formularioContacto);
+
+router.get("/eliminar", registerMail);
 
 module.exports = router;

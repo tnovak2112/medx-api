@@ -3,6 +3,7 @@ import {
   DBregistroUsuario,
   DBgenerarCodigoUsuario,
   DBactualizarClaveUsuario,
+  DBverificarCodigoUsuario,
 } from "../model/usuario.model";
 
 export async function autenticacionUsuario(req: any, res: any) {
@@ -17,6 +18,11 @@ export async function registroUsuario(req: any, res: any) {
 
 export async function generarCodigoUsuario(req: any, res: any) {
   res = await DBgenerarCodigoUsuario(req, res);
+  return res;
+}
+
+export async function verificarCodigoUsuario(req: any, res: any) {
+  res = await DBverificarCodigoUsuario(req, res);
   return res;
 }
 

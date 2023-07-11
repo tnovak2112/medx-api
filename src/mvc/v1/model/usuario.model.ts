@@ -2,7 +2,7 @@ import {
   getUsuarioSQL,
   insertUsuarioSQL,
   updatePasswordSQL,
-  updateUsuarioCodigoSQL,
+  verificarCodigoUsuarioSQL,
 } from "../../../core/querys/usuario.query";
 
 const msgHTTP = require("../controller/mensajesHTTP");
@@ -10,6 +10,7 @@ const database = require("../../../services/database.service");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const bytesToKey = require("evp_bytestokey");
+import AWS from "aws-sdk";
 
 export async function DBautenticacionUsuario(req: any, res: any) {
   const { email, password } = req.query;
@@ -33,41 +34,67 @@ export async function DBautenticacionUsuario(req: any, res: any) {
   return res;
 }
 
-export async function DBregistroUsuario(req: any, res: any) {
-  const { email, password } = req.body;
+export async function DBregistroUsuario(_req: any, _res: any) {
+  // const { email, password } = req.body;
+  // try {
+  //   const passwordEncrypt = encriptarContraseña(password);
+  //   const result = await database.simpleExecute(insertUsuarioSQL, [
+  //     email,
+  //     passwordEncrypt,
+  //     2,
+  //   ]);
+  //   //await emailCodigo(email, "Bienvenido a MEDX", "Gracias por registrarte!");
+  //   res = msgHTTP.insert200(res, result);
+  // } catch (error) {
+  //   res = msgHTTP.error(res, error);
+  // }
+  // return res;
+}
+
+export async function DBgenerarCodigoUsuario(req: any, res: any) {
+  const { email } = req.body;
+  const codigo = generarCodigo();
+
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID_SNS,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_SNS,
+    region: process.env.AWS_REGION,
+  });
 
   try {
-    const passwordEncrypt = encriptarContraseña(password);
-
     const result = await database.simpleExecute(insertUsuarioSQL, [
       email,
-      passwordEncrypt,
+      codigo,
       2,
     ]);
 
-    //await emailCodigo(email, "Bienvenido a MEDX", "Gracias por registrarte!");
+    const sns = new AWS.SNS();
+    const phoneNumber = "+56993942998";
+    const params = {
+      Message: `Tu codigo de registro en Medxapp.cl es: ${codigo}. Porfavor no compartas este código. Comencemos!`,
+      PhoneNumber: phoneNumber,
+    };
 
-    res = msgHTTP.insert200(res, result);
+    const resultSMS = await sns.publish(params).promise();
+
+    res = msgHTTP.message200(res, result, "Código enviado correctamente.");
   } catch (error) {
     res = msgHTTP.error(res, error);
   }
   return res;
 }
 
-export async function DBgenerarCodigoUsuario(req: any, res: any) {
-  const { email } = req.body;
-
-  const codigo = generarCodigo();
+export async function DBverificarCodigoUsuario(req: any, res: any) {
+  const { codigo, email } = req.body;
+  console.log(codigo, email);
 
   try {
-    const result = await database.simpleExecute(updateUsuarioCodigoSQL, [
+    const result = await database.simpleExecute(verificarCodigoUsuarioSQL, [
       codigo,
       email,
     ]);
 
-    //await emailCodigo(email, "Prueba", "El codigo es: " + codigo);
-
-    res = msgHTTP.message200(res, result, "Código enviado correctamente.");
+    res = msgHTTP.message200(res, result, "El código es correcto");
   } catch (error) {
     res = msgHTTP.error(res, error);
   }
@@ -114,7 +141,7 @@ function encriptarContraseña(password: any) {
 }
 
 function generarCodigo() {
-  return Math.floor(1000 + Math.random() * 9000);
+  return Math.floor(100000 + Math.random() * 900000);
 }
 
 //De-Ciphering
